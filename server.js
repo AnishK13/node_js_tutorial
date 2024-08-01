@@ -3,12 +3,17 @@
 const express = require('express');
 const app = express();
 const db = require('./db');
+require('dotenv').config();
+const PORT = process.env.PORT || 3000;
 
 const person = require('./models/person');
 const MenuItems = require('./models/MenuItems');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json()); //it will convert the data into json object and store 
 
+app.get('/', (req,res)=>{
+    res.send('Welcome to my hotel');
+})
 app.get('/h', (req,res)=>{
     console.log("Welcome to my server");
     res.send("Hola amigos!");
@@ -58,6 +63,7 @@ app.get('/person/:workType', async(req,res)=>{
     }
 
 })
-app.listen(3000, ()=> {
+
+app.listen(PORT, ()=> {
     console.log("Listening on port 3000");
 })
